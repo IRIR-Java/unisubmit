@@ -1,0 +1,15 @@
+[Unit]
+Description=UniSubmit Docker stack (Nginx, PHP, MySQL)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/ubuntu/unisubmit/start.sh
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/unisubmit/docker-compose.yml stop
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target

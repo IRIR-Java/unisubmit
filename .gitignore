@@ -1,0 +1,6 @@
+# Uploaded submissions and materials (student data) never go in git
+uploads/*
+!uploads/.gitkeep
+.env
+*.bak
+*.tgz
