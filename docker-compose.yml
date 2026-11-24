@@ -1,4 +1,5 @@
 services:
+  # Front container: the only one reachable from outside (port 80).
   nginx:
     image: nginx:alpine
     container_name: unisubmit_nginx
@@ -12,6 +13,7 @@ services:
     networks:
       - app-tier
 
+  # Backend container: Apache + PHP running the application.
   web:
     build: .
     container_name: unisubmit_web
@@ -23,8 +25,6 @@ services:
       - DB_NAME=unisubmit_db
       - DB_USER=root
       - DB_PASS=rootpassword
-      # start.sh writes the Windows host's current address to .env on every boot (it changes after reboots).
-      - OLLAMA_HOST=${OLLAMA_HOST:-http://172.30.208.1:11434}
     depends_on:
       db:
         condition: service_healthy
@@ -32,35 +32,13 @@ services:
     networks:
       - app-tier
 
-  # Background marker: marks anything still queued (e.g. uploaded while the AI was offline) with no clicks needed.
-  worker:
-    build: .
-    container_name: unisubmit_worker
-    command: ["php", "/var/www/html/worker.php"]
-    volumes:
-      - ./src:/var/www/html
-      - ./uploads:/var/www/html/uploads
-    environment:
-      - DB_HOST=db
-      - DB_NAME=unisubmit_db
-      - DB_USER=root
-      - DB_PASS=rootpassword
-      - OLLAMA_HOST=${OLLAMA_HOST:-http://172.30.208.1:11434}
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - app-tier
-
+  # Database container: MySQL 8 with a persistent volume.
   db:
     image: mysql:8.0
     container_name: unisubmit_db
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=unisubmit_db
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./db_init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -72,9 +50,6 @@ services:
     restart: unless-stopped
     networks:
       - app-tier
-
-# Public access is a Tailscale Funnel on the Windows host (https://<pc>.<tailnet>.ts.net:8443 -> this VM's port 80),
-# so nothing tunnel-related runs in this stack.
 
 networks:
   app-tier:

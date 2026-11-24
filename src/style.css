@@ -344,3 +344,22 @@ dialog label input, dialog label textarea { margin-top: 6px; font-weight: 400; }
     .doc-stage { padding: 10px; }
     .docx-sheet { padding: 24px 18px; }
 }
+
+/* ---------- submission platform (no-AI build) ---------- */
+.dash { grid-template-columns: minmax(0, 1fr) 300px; margin-top: 0; }
+.kv { width: 100%; border-collapse: collapse; margin-top: 14px; }
+.kv th { text-align: left; width: 140px; color: var(--muted); font-weight: 500; font-size: 13.5px; padding: 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.kv td { padding: 10px 0; border-top: 1px solid var(--line); }
+.field-label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.field-label .text-input { font-weight: 400; }
+.mark-form { display: flex; gap: 6px; align-items: center; margin: 0; }
+.mark-form .mark-input { width: 76px; }
+.mark-form .text-input { padding: 6px 9px; }
+.mark-form .text-input:not(.mark-input) { width: 190px; }
+.results td { vertical-align: middle; }
+@media (max-width: 760px) {
+    .dash { grid-template-columns: minmax(0, 1fr); }
+    .results tr { padding-left: 16px; }
+    .mark-form { flex-wrap: wrap; }
+    .mark-form .text-input:not(.mark-input) { flex: 1; min-width: 140px; }
+}
