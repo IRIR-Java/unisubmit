@@ -43,7 +43,14 @@ running Docker, with Nginx in front of Apache/PHP and MySQL.
 | --- | --- | --- |
 | ![](docs/screenshots/08-mobile-hand-in.png) | ![](docs/screenshots/09-mobile-student-result.png) | ![](docs/screenshots/10-mobile-lecturer.png) |
 
+## Documents
+
+- [Written report (Word)](docs/COSC428_Group5_UniSubmit_Report.docx): setup, configuration, implementation, testing and results
+- [Presentation slides (PowerPoint)](docs/COSC428_Group5_UniSubmit_Slides.pptx): 15 slides, readable on their own, with speaker notes
+
 ## Architecture
+
+![Architecture](docs/screenshots/00-architecture.png)
 
 ```
 Browser ──HTTPS──> Tailscale Funnel (in the VM)
