@@ -169,6 +169,7 @@ a.f-name:hover { color: var(--accent); }
 /* ---------- student: result ---------- */
 .result-hero { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
 .who { display: flex; gap: 14px; align-items: flex-start; min-width: 0; }
+.who > div { min-width: 0; }
 .who h1 { font-size: 21px; }
 .who.small { align-items: center; gap: 10px; }
 .file-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
@@ -313,10 +314,22 @@ dialog label input, dialog label textarea { margin-top: 6px; font-weight: 400; }
     .topbar-inner { padding: 10px 16px; gap: 10px; }
     .course-chip, .grader-text { display: none; }
     .kpis { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .result-hero { flex-direction: column; align-items: flex-start; }
+    .result-hero { flex-direction: column; align-items: stretch; }
+    .result-hero .who { width: 100%; }
     .score-block { flex-direction: row; align-items: center; }
     .two-up, .people, .grid-2 { grid-template-columns: 1fr; }
-    .assignment-top { flex-wrap: wrap; }
+    .assignment-top { flex-wrap: wrap; align-items: flex-start; }
+    .assignment-title { flex: 1 1 calc(100% - 58px); }
+    .assignment-top .actions { width: 100%; padding-left: 58px; }
+    .who > div { min-width: 0; }
+    .who .muted { overflow-wrap: anywhere; }
+    .file-chip { max-width: 100%; }
+    .grader { padding: 6px; }
+    .grader.on, .grader.off { background: none; }
+    .brand-name { font-size: 16px; }
+    .switch a { padding: 6px 12px; }
+    .files li { flex-wrap: wrap; gap: 4px 12px; }
+    .files .f-name { flex-basis: 100%; }
     .attn-list li { flex-wrap: wrap; }
     .attn-actions { width: 100%; padding-left: 48px; }
     .results thead { display: none; }
